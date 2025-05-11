@@ -7,9 +7,14 @@ Documentation [Click](https://docs.google.com/document/d/1V2tavc0tBNkLii7OZHZvM3
 1. Buat folder di local dan clone repo nya
 2. Buat virtual environment
 3. Input environment variables di virtual env. nya
-4. Buat database di local sebagai data warehouse
+4. Buat database postgresql di local 
 5. Install requirements
 6. Run main.py
+```
+python main.py
+
+DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test python main.py
+```
 
 # CLONE REPO
     git clone -b main https://github.com/erric-syd/etl-fintech-statistic.git .
