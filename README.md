@@ -44,3 +44,9 @@ DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test
 
 # REQUIREMENTS
     pip install -r requirements.txt
+
+
+# VISUALIZATIONS
+On main.py, True: Enable viz, False: Disable viz
+
+    enable_visualization = [True / False]
