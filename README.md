@@ -20,6 +20,12 @@ Run di terminal:
 
     mkvirtualenv etl_fintech_statistic_env -p ~/.pyenv/versions/3.11.6/bin/python
 
+## Env. Variable
+Menggunakan postgresql versi 16.0
+````
+DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test
+````
+
 
 # REQUIREMENTS
     pip install -r requirements.txt
