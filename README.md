@@ -50,3 +50,11 @@ DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test
 On main.py, True: Enable viz, False: Disable viz
 
     enable_visualization = [True / False]
+## Handling socket.error: [Errno 48] Address already in use
+You can find the process using the port (e.g., port 8080) with this command:
+    
+    lsof -i :8080
+
+This will show you the PID (Process ID). Then, you can kill the process:
+
+    kill -9 <PID>
