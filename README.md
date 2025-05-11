@@ -2,6 +2,7 @@
 Mini ETL OJK Fintech statistic processor.
 
 ## Tech Stack
+- MacOS
 - python 3.11.6
 - Postgresql 16
 
