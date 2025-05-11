@@ -1,4 +1,4 @@
-from tools import DatabaseTools as db_t
+from tools import EventTools as event_t, DatabaseTools as db_t
 
 
 def main():
@@ -27,6 +27,8 @@ def main():
           __dts;
     """
     db_t.execute_query(q)
+
+    event_t.show_msg_done(f"Create Views - {views_name}")
 
 
 if __name__ == "__main__":

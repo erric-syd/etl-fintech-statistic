@@ -50,9 +50,27 @@ class DatabaseTools:
             index=False,
         )
 
-    @classmethod
-    def execute_query(cls, q):
+    @staticmethod
+    def execute_query(q):
         engine = sa.create_engine(os.environ["DB_URL_PSQL"])
         with engine.connect() as con:
             con.execute(sa.text(q))
             con.commit()
+
+    @classmethod
+    def drop_all_views(cls):
+        """Using cascade to forcefully drop all views"""
+        q = f"""
+            DO $$ 
+            DECLARE
+                r RECORD;
+            BEGIN
+                FOR r IN (SELECT table_name FROM information_schema.views WHERE table_schema = current_schema()) 
+                LOOP
+                    EXECUTE 'DROP VIEW IF EXISTS ' || quote_ident(r.table_name) || ' CASCADE';
+                END LOOP;
+            END $$;
+        """
+        cls.execute_query(q)
+
+        EventTools.show_msg_done(f"Drop All Views")

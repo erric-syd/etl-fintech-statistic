@@ -13,8 +13,7 @@ pd.options.display.float_format = "{:.0f}".format
 class Processor:
     """Extract data soure and load to data warehouse"""
 
-    @classmethod
-    def do(cls, filepath_dts, validation_query, table_name):
+    def do(self, filepath_dts, validation_query, table_name):
         df = DataSource(filepath_dts).do()
 
         # Transform, remove province & region, and Rename, double reset_index to add ID.
@@ -24,6 +23,17 @@ class Processor:
         # Shift ID
         df["id"] = df["id"] + 1
 
+        df = self.normalize_table(df)
+
+        # Add validation check
+        df = duckdb.sql(validation_query).to_df()
+
+        db_t.load_to_database(df=df, tbn=table_name)
+
+        event_t.show_msg_done(f"Process Data Source - {table_name}")
+
+    @classmethod
+    def normalize_table(cls, df):
         # Convert period into clear format and add previous value
         q = """
             WITH __dts AS (
@@ -48,14 +58,7 @@ class Processor:
             FROM
               __dts
         """
-        df = duckdb.sql(q).to_df()
-
-        # Add validation check
-        df = duckdb.sql(validation_query).to_df()
-
-        db_t.load_to_database(df=df, tbn=table_name)
-
-        event_t.show_msg_done(f"Process Data Source - {table_name}")
+        return duckdb.sql(q).to_df()
 
 
 class DataSource:

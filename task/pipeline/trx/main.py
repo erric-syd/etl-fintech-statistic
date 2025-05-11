@@ -18,7 +18,7 @@ def validation_query():
             a."period",
             a.cumulative_total,
             --   a.prev_value,
-            a.cumulative_total > a.prev_value AS validation_check
+            a.cumulative_total > a.prev_value AS is_valid
           FROM
             df a
         )
