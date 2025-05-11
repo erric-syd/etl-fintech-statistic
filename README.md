@@ -2,6 +2,9 @@
 Mini ETL OJK Fintech statistic processor.
 Documentation [Click](https://docs.google.com/document/d/1V2tavc0tBNkLii7OZHZvM3PxDT_XeTw4sgGZsoLqvEQ/edit?tab=t.0)
 
+## Tech Stack
+- python 3.11.6
+- Postgresql 16
 
 ## Step-by-step
 1. Buat folder di local dan clone repo nya
@@ -21,7 +24,7 @@ DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test python main.py
 
 
 # VIRTUAL ENVIRONMENT
-Membuat virtual env. untuk isolasi packages. Project ini menggunakan mkvirtualenv dan python 3.11.6.
+Membuat virtual env. untuk isolasi packages. Project ini menggunakan mkvirtualenv.
 ## Tutorial install mkvirtualenv
 [mkvirtualenv python](https://www.geeksforgeeks.org/using-mkvirtualenv-to-create-new-virtual-environment-python/)
 ## Tutorial install python untuk mkvirtualenv
@@ -35,7 +38,6 @@ Run di terminal:
     mkvirtualenv etl_fintech_statistic_env -p ~/.pyenv/versions/3.11.6/bin/python
 
 ## Env. Variable
-Menggunakan postgresql versi 16.0
 ````
 DB_URL_PSQL=postgresql://salmoners@localhost/fdc_test
 ````
