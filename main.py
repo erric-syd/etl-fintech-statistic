@@ -9,6 +9,12 @@ from task.pipeline.npp.main import main as task_pipeline_npp
 # Task Views
 from task.views.ticket_size.main import main as task_views_ticket_size
 
+# Task Visualizations
+from task.visualizations.ticket_size.main import main as task_viz_ticket_size
+
+# Set, True= Enable viz; False: Disable viz
+enable_visualization = True
+
 
 def main():
     """Pipeline first then Views."""
@@ -22,6 +28,10 @@ def main():
 
     # Views Model
     task_views_ticket_size()
+
+    # Visualization
+    if enable_visualization:
+        task_viz_ticket_size()
 
 
 if __name__ == "__main__":

@@ -42,6 +42,10 @@ class EventTools:
 class DatabaseTools:
 
     @staticmethod
+    def extract_from_database(q):
+        return pd.read_sql(q, con=os.environ["DB_URL_PSQL"])
+
+    @staticmethod
     def load_to_database(df, tbn):
         df.to_sql(
             name=tbn,

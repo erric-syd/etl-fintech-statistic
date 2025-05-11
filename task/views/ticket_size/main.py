@@ -1,5 +1,8 @@
 from tools import EventTools as event_t, DatabaseTools as db_t
 
+# Packages
+import pandas as pd
+
 
 def main():
     views_name = "ticket_size"
@@ -9,6 +12,7 @@ def main():
         CREATE VIEW {views_name} AS 
         WITH __dts AS (
           SELECT
+            row_number() OVER () AS id,
             a."period",
             -- a.cumulative_total * 1000000000 AS funding_amount,
             -- b.cumulative_total AS total_account,
