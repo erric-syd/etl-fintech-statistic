@@ -1,6 +1,5 @@
 # etl-fintech-statistic
 Mini ETL OJK Fintech statistic processor.
-Documentation [Click](https://docs.google.com/document/d/1V2tavc0tBNkLii7OZHZvM3PxDT_XeTw4sgGZsoLqvEQ/edit?tab=t.0)
 
 ## Tech Stack
 - python 3.11.6
