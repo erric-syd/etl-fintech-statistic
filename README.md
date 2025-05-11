@@ -1,2 +1,2 @@
 # etl-fintech-statistic
-Mini ETL, Fintech statistic processor.
+Mini ETL OJK Fintech statistic processor.
