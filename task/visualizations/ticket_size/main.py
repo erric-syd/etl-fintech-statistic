@@ -3,7 +3,6 @@ from tools import EventTools as event_t, DatabaseTools as db_t
 # Packages
 import plotly.graph_objects as go
 import pandas as pd
-from nicegui import ui
 
 
 def main():
@@ -39,37 +38,40 @@ class Visualization:
                 ),
             )
         )
+        # Update background
         fig.update_layout(
             title="Average Disbursement Amount per Account",
             xaxis_title="Period",
             yaxis_title="Average Ticket Size",
             template="plotly_dark",
-            margin=dict(l=50, r=50, t=50, b=50),
+            margin=dict(l=50, r=50, t=50, b=250),
         )
 
-        # fig.show()
+        # Add statistic description.
+        first_ticket_size = df["ticket_size"].iloc[0]
+        last_ticket_size = df["ticket_size"].iloc[-1]
+        total_growth = last_ticket_size - first_ticket_size
+        percent_growth = (total_growth / df["ticket_size"].iloc[0]) * 100
+        # fmt: off
+        fig.add_annotation(
+            text=f"Total Growth Since Beginning: Rp {total_growth:,.0f}<br>"
+                 f"Percent Growth Since Beginning: {percent_growth:.2f}%<br><br>"
+                 f"There was an {percent_growth:.2f}% increase in ticket size from {df['period'].min()} to {df['period'].max()}, "
+                 f"from Rp {first_ticket_size:,.0f} to Rp {last_ticket_size:,.0f}.",
+            align="left",
+            showarrow=False,
+            xref="paper",
+            yref="paper",
+            font=dict(color="white", size=15),
+            bgcolor="rgba(0,0,0,0)",
+            y=-0.25,
+            x=0,
+            xanchor="left",
+        )
+        # fmt: on
 
-        # Create NiceGUI dashboard
-        ui.plotly(fig).classes("w-full h-[750px]")  # Custom 75% height using square brackets
-        # ui.plotly(fig).classes("w-full h-screen")  # Full viewport height
-
-        # Add a card with summary stats
-        with ui.card().classes("w-full"):
-            first_ticket_size = df["ticket_size"].iloc[0]
-            last_ticket_size = df["ticket_size"].iloc[-1]
-            total_growth = last_ticket_size - first_ticket_size
-            percent_growth = (total_growth / df["ticket_size"].iloc[0]) * 100
-
-            ui.label(f"Total Growth Since Beginning: Rp {total_growth:,.0f}").classes("text-lg")
-            ui.label(f"Percent Growth Since Beginning: {percent_growth:.2f}%").classes("text-lg")
-            ui.label(
-                f"There was an {percent_growth:.2f}% increase in ticket size "
-                f"from {df['period'].min()} to {df['period'].max()}, reflecting a growth in "
-                f"the average loan amount disbursed per account, "
-                f"from Rp {first_ticket_size:,.0f} to Rp {last_ticket_size:,.0f}."
-            ).classes("text-lg")
-
-        ui.run(port=8080, reload=False)
+        # Show viz
+        fig.show()
 
     @classmethod
     def get_data(cls):
