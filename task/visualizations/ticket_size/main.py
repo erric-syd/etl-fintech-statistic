@@ -43,6 +43,7 @@ class Visualization:
             title="Average Disbursement Amount per Account",
             xaxis_title="Period",
             yaxis_title="Average Ticket Size",
+            yaxis_tickformat=",",
             template="plotly_dark",
             margin=dict(l=50, r=50, t=50, b=250),
         )
