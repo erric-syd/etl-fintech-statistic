@@ -74,6 +74,8 @@ class Visualization:
         # Show viz
         fig.show()
 
+        event_t.show_msg_done(f"Show Visualizations")
+
     @classmethod
     def get_data(cls):
         q = """
